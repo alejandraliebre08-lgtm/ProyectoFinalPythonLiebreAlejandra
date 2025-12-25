@@ -1,0 +1,17 @@
+{% extends "tienda/inicio.html" %}
+{% load static %}
+
+{% block contenidoQueCambia %}
+<div class="container mt-4">
+  <h2>Mi perfil</h2>
+
+  <div class="card mt-3">
+    <div class="card-body">
+      <p><strong>Usuario:</strong> {{ user.username }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+
+      <a class="btn btn-primary" href="{% url 'accounts:profile_edit' %}">Editar perfil</a>
+    </div>
+  </div>
+</div>
+{% endblock contenidoQueCambia %}

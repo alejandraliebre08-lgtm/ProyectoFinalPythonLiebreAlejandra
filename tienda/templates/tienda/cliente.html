@@ -1,0 +1,22 @@
+{% extends "tienda/inicio.html" %}
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<h1>Clientes</h1>
+<p>En esta sección se pueden cargar y consultar los datos de los clientes que realizan pedidos en el e-commerce.</p>
+
+{% if user.is_authenticated %}
+  <a class="btn btn-primary" href="{% url 'clienteFormulario' %}">Nuevo Cliente</a>
+{% endif %}
+
+{% for cliente in clientes %}
+    <h3>Nombre: {{ cliente.nombre }} {{ cliente.apellido }}</h3>
+    <p>Email: {{ cliente.email }}</p>
+    <p>Teléfono: {{ cliente.telefono }}</p>
+    <hr>
+{% empty %}
+    <p>No hay clientes cargados.</p>
+{% endfor %}
+
+{% endblock %}

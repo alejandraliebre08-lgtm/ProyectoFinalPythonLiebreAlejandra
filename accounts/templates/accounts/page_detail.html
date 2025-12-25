@@ -1,0 +1,18 @@
+{% extends "tienda/inicio.html" %}
+
+{% block contenidoQueCambia %}
+<div class="container mt-4">
+  <h2>{{ page.titulo }}</h2>
+  <small class="text-muted">{{ page.fecha|date:"d/m/Y" }}</small>
+
+  {% if page.subtitulo %}
+    <h5 class="mt-3">{{ page.subtitulo }}</h5>
+  {% endif %}
+
+  <p class="mt-4">{{ page.contenido }}</p>
+
+  <a href="{% url 'accounts:pages_list' %}" class="btn btn-secondary mt-3">
+    Volver
+  </a>
+</div>
+{% endblock %}

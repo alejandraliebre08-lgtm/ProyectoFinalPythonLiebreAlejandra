@@ -1,0 +1,34 @@
+{% extends "tienda/inicio.html" %}
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<h1>Carrito</h1>
+
+{% if items %}
+    <ul>
+        {% for item in items %}
+            <li>
+                {{ item.producto.nombre }} -
+                Cantidad: {{ item.cantidad }} -
+                ${{ item.producto.precio }}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h3>Total: ${{ total }}</h3>
+
+    <form method="post" action="{% url 'crear_pedido' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-success">
+            Confirmar pedido
+        </button>
+    </form>
+
+{% else %}
+    <p>El carrito está vacío.</p>
+{% endif %}
+
+{% endblock %}
+
+

@@ -1,0 +1,24 @@
+{% extends "tienda/inicio.html" %}
+{% block contenidoQueCambia %}
+
+<h1>Mis pedidos</h1>
+
+{% if pedidos %}
+  <ul>
+    {% for pedido in pedidos %}
+      <li>
+        <strong>Pedido #{{ pedido.id }}</strong><br>
+        Fecha: {{ pedido.fecha }}<br>
+        Estado: {{ pedido.estado }}<br>
+        Total: ${{ pedido.total }}<br>
+
+        <a href="{% url 'seguimiento_pedido' pedido.id %}">Ver seguimiento</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+        <p>Todavía no hiciste pedidos! Hacé el primero y retiralo en los locales más cercanos. ¿No estás para salir de casa? Te llevavamos el producto a donde quieras.</p>
+{% endif %}
+
+{% endblock %}
+

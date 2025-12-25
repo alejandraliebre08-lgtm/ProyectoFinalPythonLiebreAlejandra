@@ -1,0 +1,23 @@
+{% extends "tienda/inicio.html" %}
+{% block contenidoQueCambia %}
+
+<h1>Productos</h1>
+
+{% if productos %}
+  <ul>
+     {% for producto in productos %}
+  <li>
+    {{ producto.nombre }} - ${{ producto.precio }}
+
+    <a href="{% url 'agregar_carrito' producto.id %}"
+       class="btn btn-sm btn-primary">
+       Agregar al carrito
+    </a>
+  </li>
+{% endfor %}
+  </ul>
+{% else %}
+  <p>No hay productos disponibles.</p>
+{% endif %}
+
+{% endblock %}

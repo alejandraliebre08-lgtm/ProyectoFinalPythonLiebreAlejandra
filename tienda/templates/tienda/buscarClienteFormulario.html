@@ -1,0 +1,27 @@
+{% extends "tienda/inicio.html" %}
+{% load static %}
+
+{% block contenidoQueCambia %}
+<div class="container mt-4">
+  <h2>Buscar Cliente por Apellido</h2>
+
+  <form method="get">
+    {{ form.as_p }}
+
+    <button type="submit" class="btn btn-primary">Buscar</button>
+  </form>
+
+  <hr>
+
+  {% if resultados %}
+    <h3>Resultados:</h3>
+    <ul>
+      {% for cliente in resultados %}
+        <li>{{ cliente.nombre }} {{ cliente.apellido }} - {{ cliente.email }}</li>
+      {% endfor %}
+    </ul>
+  {% elif resultados is not None %}
+    <p>No se encontraron clientes con ese apellido.</p>
+  {% endif %}
+</div>
+{% endblock %}

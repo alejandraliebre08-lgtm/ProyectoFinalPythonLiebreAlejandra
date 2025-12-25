@@ -1,0 +1,17 @@
+{% extends "tienda/inicio.html" %}
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<h1>Nuevo Producto</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">Guardar</button>
+</form>
+
+<a href="{% url 'producto_list' %}">Volver</a>
+
+{% endblock %}

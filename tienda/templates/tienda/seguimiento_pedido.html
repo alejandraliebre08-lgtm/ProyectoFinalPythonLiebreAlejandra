@@ -1,0 +1,12 @@
+{% extends "tienda/inicio.html" %}
+{% block contenidoQueCambia %}
+
+<h1>Seguimiento del pedido #{{ pedido.id }}</h1>
+<p><strong>Estado:</strong> {{ pedido.estado }}</p>
+<p><strong>Fecha:</strong> {{ pedido.fecha }}</p>
+<p><strong>Total:</strong> ${{ pedido.total }}</p>
+
+<a class="btn btn-secondary" href="{% url 'Pedido' %}">Volver a mis pedidos</a>
+
+{% endblock %}
+

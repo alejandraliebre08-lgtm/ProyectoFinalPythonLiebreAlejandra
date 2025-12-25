@@ -1,0 +1,25 @@
+{% extends "tienda/inicio.html" %}
+{% load static %}
+
+{% block title %}Login{% endblock title %}
+
+{% block contenidoQueCambia %}
+
+<div class="d-flex justify-content-center">
+  <div class="d-flex flex-column">
+
+    {% if msg_login %}
+      <p class="fs-5 fw-bold text-danger">{{ msg_login }}</p>
+    {% endif %}
+
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Iniciar sesión">
+    </form>
+
+  </div>
+</div>
+
+{% endblock contenidoQueCambia %}
+

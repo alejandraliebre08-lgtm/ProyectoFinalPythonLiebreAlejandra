@@ -2,6 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Cliente(models.Model):
     nombre = models.CharField(max_length=40)
     apellido = models.CharField(max_length=40)
@@ -61,5 +62,19 @@ class Pedido(models.Model):
     def __str__(self):
         return f"Pedido #{self.id} - {self.user.username}"
 
+
+
+
+
+class Page(models.Model):
+    titulo = models.CharField(max_length=200)
+    subtitulo = models.CharField(max_length=200, blank=True, null=True)
+    contenido = models.TextField()
+    autor = models.ForeignKey(User, on_delete=models.CASCADE, related_name="pages")
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    fecha_actualizacion = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.titulo
 
 

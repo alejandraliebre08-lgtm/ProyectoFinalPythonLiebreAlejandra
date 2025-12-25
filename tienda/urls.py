@@ -2,15 +2,19 @@ from django.urls import path
 from . import views
 from .views import ProductoListView, ProductoDetailView, ProductoCreateView, ProductoUpdateView, ProductoDeleteView
 
+app_name = "tienda"
+
 urlpatterns = [
-    path("", views.inicio, name="Inicio"),
-    path("cliente/", views.cliente, name="Cliente"),
-    path("producto/", views.producto, name="Producto"),
-    path("carrito/", views.carrito, name="Carrito"),
+    path("", views.inicio, name="inicio"),
+    path("cliente/", views.cliente, name="cliente"),
+    path("producto/", views.producto, name="producto"),
+    path("carrito/", views.carrito, name="carrito"),
     path("carrito/agregar/<int:producto_id>/", views.agregar_al_carrito, name="agregar_carrito"),
-    path("pedido/", views.pedido, name="Pedido"),
+    path("pedido/", views.pedido, name="pedido"),
     path("pedido/crear/", views.crear_pedido, name="crear_pedido"),    
     path("pedido/seguimiento/<int:pedido_id>/", views.seguimiento_pedido, name="seguimiento_pedido"),
+    path("pages/", views.pages_list, name="pages_list"),
+    path("pages/<int:id>/", views.page_detail, name="pages_detail"),
     path("clienteFormulario/", views.clienteFormulario, name="clienteFormulario"),
     path("buscarClienteFormulario/", views.buscarClienteFormulario, name="buscarClienteFormulario"),       
 

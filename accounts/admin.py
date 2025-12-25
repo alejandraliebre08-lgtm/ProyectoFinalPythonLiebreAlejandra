@@ -1,5 +1,4 @@
 from django.contrib import admin
-from .models import Avatar, Page
+from .models import Avatar
 
 admin.site.register(Avatar)
-admin.site.register(Page)

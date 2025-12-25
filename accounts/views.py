@@ -8,17 +8,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
 from .forms import AvatarFormulario
-from .models import Avatar, Page 
+from .models import Avatar
 
-
-
-def page_detail(request, id):
-    page = get_object_or_404(Page, id=id)
-    return render(request, "accounts/page_detail.html", {"page": page})
-
-def pages_list(request):
-    pages = Page.objects.all()
-    return render(request, "accounts/pages_list.html", {"pages": pages})
 
 @login_required
 def editar_perfil(request):
@@ -52,7 +43,7 @@ def login_request(request):
 
             if user is not None:
                 login(request, user)
-                return redirect("Inicio")
+                return redirect("tienda:inicio")
 
             msg_login = "Usuario o contraseña incorrectos"
     else:

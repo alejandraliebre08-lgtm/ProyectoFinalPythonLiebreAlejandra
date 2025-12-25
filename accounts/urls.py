@@ -13,9 +13,7 @@ urlpatterns = [
     path("profile/edit/", views.profile_edit, name="profile_edit"),
     path("password/change/",CambiarContrasenia.as_view(),name="password_change"),
     path("about/", views.about, name="about"),
-    path("pages/", views.pages_list, name="pages_list"),
-    path("pages/<int:id>/", views.page_detail, name="pages_detail"),
-]
+   ]
 
 
 

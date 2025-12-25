@@ -24,8 +24,8 @@ urlpatterns = [
     path("admin/", admin.site.urls),
 
     # tus apps:
-    path("", include("tienda.urls")),
-    path("accounts/", include("accounts.urls")),
+    path("", include(("tienda.urls", "tienda"), namespace="tienda")),
+    path("accounts/", include(("accounts.urls", "accounts"), namespace="accounts")),
 ]
 
 # para MEDIA (avatares)

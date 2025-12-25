@@ -9,7 +9,7 @@
   <li>
     {{ producto.nombre }} - ${{ producto.precio }}
 
-    <a href="{% url 'agregar_carrito' producto.id %}"
+    <a href="{% url 'tienda:agregar_carrito' producto.id %}"
        class="btn btn-sm btn-primary">
        Agregar al carrito
     </a>

@@ -12,7 +12,7 @@
         Estado: {{ pedido.estado }}<br>
         Total: ${{ pedido.total }}<br>
 
-        <a href="{% url 'seguimiento_pedido' pedido.id %}">Ver seguimiento</a>
+        <a href="{% url 'tienda:seguimiento_pedido' pedido.id %}">Ver seguimiento</a>
       </li>
     {% endfor %}
   </ul>

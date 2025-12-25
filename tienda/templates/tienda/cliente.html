@@ -7,7 +7,7 @@
 <p>En esta sección se pueden cargar y consultar los datos de los clientes que realizan pedidos en el e-commerce.</p>
 
 {% if user.is_authenticated %}
-  <a class="btn btn-primary" href="{% url 'clienteFormulario' %}">Nuevo Cliente</a>
+  <a class="btn btn-primary" href="{% url 'tienda:clienteFormulario' %}">Nuevo Cliente</a>
 {% endif %}
 
 {% for cliente in clientes %}

@@ -1,0 +1,14 @@
+{% extends "tienda/inicio.html" %}
+
+{% block contenidoQueCambia %}
+
+{% for page in pages %}
+  <h3>{{ page.nombre }}</h3>
+  <p>{{ page.descripcion|truncatewords:20 }}</p>
+  <a href="{% url 'tienda:pages_detail' page.id %}">Leer más</a>
+
+{% empty %}
+  <p>No hay páginas aún</p>
+{% endfor %}
+
+{% endblock %}

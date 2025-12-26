@@ -2,20 +2,18 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
 
-
-
-
 class Avatar(models.Model):
     user = models.OneToOneField(
-        settings.AUTH_USER_MODEL,
+        User,
         on_delete=models.CASCADE,
-        null=True
+        null=True,
+        blank=True
     )
-    image = models.ImageField(
-        upload_to="avatars",
+    imagen = models.ImageField(
+        upload_to="avatares",
         null=True,
         blank=True
     )
 
     def __str__(self):
-        return f"{settings.MEDIA_URL}{self.image}"
+        return f"Avatar de {self.user}"

@@ -140,6 +140,17 @@ def page_detail(request, id):
     return render(request, "tienda/page_detail.html", {"page": page})
 
 
+@login_required
+def pedido_eliminar(request, pk):
+    pedido = get_object_or_404(Pedido, pk=pk, user=request.user)
+
+    if request.method == "POST":
+        pedido.delete()
+        return redirect("tienda:pedido")  # tu lista de pedidos
+
+    return render(request, "tienda/pedido_confirm_delete.html", {"pedido": pedido})
+
+
 # --------- CBV Productos ---------
 
 class ProductoListView(ListView):

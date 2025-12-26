@@ -1,0 +1,25 @@
+{% extends "tienda/inicio.html" %}
+
+{% block contenidoQueCambia %}
+
+<h2>Eliminar pedido #{{ pedido.id }}</h2>
+
+<p>¿Estás segura de que querés eliminar este pedido?</p>
+
+<ul>
+    <li><strong>Fecha:</strong> {{ pedido.fecha }}</li>
+    <li><strong>Estado:</strong> {{ pedido.estado }}</li>
+    <li><strong>Total:</strong> ${{ pedido.total }}</li>
+</ul>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">
+        Sí, eliminar
+    </button>
+    <a href="{% url 'tienda:pedido' %}" class="btn btn-secondary">
+        Cancelar
+    </a>
+</form>
+
+{% endblock contenidoQueCambia %}

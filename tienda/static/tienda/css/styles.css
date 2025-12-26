@@ -10839,6 +10839,10 @@ textarea.form-control-lg {
 }
 
 header.masthead {
+  margin-top: 80px;   /* <-- agregué esto */
+  padding-top: calc(8rem + 70px);  /* suma espacio arriba */
+  background-clip: content-box;     /* NO pinta la imagen en el padding */
+  background-origin: content-box;   /* mismo efecto, más seguro */
   position: relative;
   background-color: #343a40;
   background: url("../assets/img/bg-masthead.jpg") no-repeat center center;
@@ -10916,4 +10920,9 @@ header.masthead h1, header.masthead .h1 {
 footer.footer {
   padding-top: 4rem;
   padding-bottom: 4rem;
+}
+
+/* NAVBAR PERSONALIZADA */
+.navbar-custom {
+  background-color: #FFD966 !important;
 }

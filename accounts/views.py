@@ -108,7 +108,6 @@ def profile_edit(request):
         "accounts/profile_edit.html", {"mi_form": miFormulario, "usuario": usuario}
         )    
 
-
 @login_required
 def agregar_avatar(request):
     if request.method == "POST":
@@ -116,34 +115,13 @@ def agregar_avatar(request):
         if form.is_valid():
             Avatar.objects.update_or_create(
                 user=request.user,
-                defaults={"image": form.cleaned_data["image"]}
+                defaults={"imagen": request.FILES.get("imagen")}
             )
-            return redirect("Inicio")
+            return redirect("tienda:inicio")
     else:
         form = AvatarFormulario()
 
-    return render(
-        request,
-        "accounts/agregar_avatar.html",
-        {"form": form}
-    )
-
-
-@login_required
-def avatar_upload(request):
-    avatar_obj = Avatar.objects.filter(user=request.user).first()
-
-    if request.method == "POST":
-        form = AvatarFormulario(request.POST, request.FILES, instance=avatar_obj)
-        if form.is_valid():
-            avatar = form.save(commit=False)
-            avatar.user = request.user
-            avatar.save()
-            return redirect("accounts:profile")
-    else:
-        form = AvatarFormulario(instance=avatar_obj)
-
-    return render(request, "accounts/avatar_form.html", {"form": form, "avatar": avatar_obj})
+    return render(request, "accounts/agregar_avatar.html", {"form": form})
 
 
 

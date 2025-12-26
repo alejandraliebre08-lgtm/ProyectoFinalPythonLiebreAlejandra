@@ -13,6 +13,11 @@
         Total: ${{ pedido.total }}<br>
 
         <a href="{% url 'tienda:seguimiento_pedido' pedido.id %}">Ver seguimiento</a>
+        <br>
+        <a class="btn btn-outline-danger btn-sm"   href="{% url 'tienda:pedido_eliminar' pedido.id %}">
+   Eliminar
+</a>
+
       </li>
     {% endfor %}
   </ul>

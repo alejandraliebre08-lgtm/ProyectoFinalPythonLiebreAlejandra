@@ -1,6 +1,7 @@
 # tienda/models.py
 from django.db import models
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
 
 
 class Cliente(models.Model):
@@ -65,16 +66,20 @@ class Pedido(models.Model):
 
 
 
-
 class Page(models.Model):
-    titulo = models.CharField(max_length=200)
-    subtitulo = models.CharField(max_length=200, blank=True, null=True)
-    contenido = models.TextField()
-    autor = models.ForeignKey(User, on_delete=models.CASCADE, related_name="pages")
-    fecha_creacion = models.DateTimeField(auto_now_add=True)
-    fecha_actualizacion = models.DateTimeField(auto_now=True)
+    titulo = models.CharField(max_length=200)                 # CharField 1
+    subtitulo = models.CharField(max_length=200, blank=True, null=True) # CharField 2
+
+    contenido = RichTextField()                               # TEXTO ENRIQUECIDO ✔️
+    imagen = models.ImageField(upload_to="pages", blank=True, null=True)  # IMAGEN ✔️
+
+    autor = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="pages"
+    )
+
+    fecha_creacion = models.DateTimeField(auto_now_add=True)  # FECHA ✔️
 
     def __str__(self):
         return self.titulo
-
-

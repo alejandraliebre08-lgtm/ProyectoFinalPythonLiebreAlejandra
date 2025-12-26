@@ -18,101 +18,86 @@
     </head>
     <body>
         <!-- Navigation-->
-       <nav class="navbar navbar-light bg-light static-top">
-       <div class="container">
+         <nav class="navbar navbar-expand-lg navbar-custom static-top">
 
-      <!-- TIENDA -->
-       <a class="navbar-brand" href="{% url 'tienda:inicio' %}">Inicio</a>
-       <a class="navbar-brand" href="{% url 'tienda:cliente' %}">Cliente</a>
-       <a class="navbar-brand" href="{% url 'tienda:producto' %}">Producto</a>
-       <a class="navbar-brand" href="{% url 'tienda:carrito' %}">Carrito</a>
-       <a class="navbar-brand" href="{% url 'tienda:pedido' %}">Pedido</a>
-       <a class="navbar-brand" href="{% url 'tienda:pages_list' %}">Pages</a>
+    <div class="container">
 
+    <!-- TIENDA -->
+    <a class="navbar-brand" href="{% url 'tienda:inicio' %}">Inicio</a>
+    <a class="navbar-brand" href="{% url 'tienda:cliente' %}">Cliente</a>
+    <a class="navbar-brand" href="{% url 'tienda:producto' %}">Producto</a>
 
-      <!-- ACCOUNTS -->
-      <a class="navbar-brand" href="{% url 'accounts:about' %}">Acerca de mí</a>
-{% if request.user.is_authenticated %}
+    {% if user.is_authenticated %}
+      <a class="navbar-brand" href="{% url 'tienda:carrito' %}">Carrito</a>
+      <a class="navbar-brand" href="{% url 'tienda:pedido' %}">Pedido</a>
+    {% endif %}
 
-  {% if avatar and avatar.image %}
-    <img src="{{ avatar.image.url }}" height="40" class="rounded-circle">
+    <a class="navbar-brand" href="{% url 'tienda:pages_list' %}">Pages</a>
+<!-- ACCOUNTS -->
+<a class="navbar-brand" href="{% url 'accounts:about' %}">Acerca de mí</a>
+{% if user.is_authenticated %}
+  {% if avatar and avatar.imagen %}
+    <img
+      src="{{ avatar.imagen.url }}"
+      alt="avatar"
+      class="rounded-circle me-2"
+      style="width:40px; height:40px; object-fit:cover;"
+    >
+  {% else %}
+    <span class="badge bg-secondary rounded-circle me-2"
+          style="width:40px; height:40px; display:flex; align-items:center; justify-content:center;">
+      {{ user.username|first|upper }}
+    </span>
   {% endif %}
 
-  <span class="ms-2">{{ request.user.username }}</span>
+  <span class="me-2">{{ user.username }}</span>
 
-  <a class="btn btn-outline-primary ms-2"
+  <a class="btn btn-outline-primary btn-sm ms-2"
      href="{% url 'accounts:profile' %}">
-     Mi perfil
+    Mi perfil
   </a>
 
-  <form method="post"
-        action="{% url 'accounts:logout' %}"
-        style="display:inline;">
+  <form method="post" action="{% url 'accounts:logout' %}" style="display:inline;">
     {% csrf_token %}
-    <button type="submit" class="btn btn-danger ms-2"> 
-        Cerrar sesión
-    </button>
+    <button type="submit" class="btn btn-danger btn-sm ms-2">Cerrar sesión</button>
   </form>
 
 {% else %}
+<a class="btn btn-outline-primary btn-sm ms-2"
+   href="{% url 'accounts:login' %}">
+   Iniciar sesión
+</a>
 
-  <a class="btn btn-success ms-2" href="{% url 'accounts:login' %}">Iniciar sesión </a>
-
-  <a class="btn btn-info ms-2" href="{% url 'accounts:register' %}"> Registrarse </a>
-
+<a class="btn btn-primary btn-sm ms-2"
+   href="{% url 'accounts:register' %}">
+   Registrarse
+</a>
 {% endif %}
-
   </div>
 </nav>
     <!-- Masthead-->
-        <header class="masthead">
-            <div class="container position-relative">
-                <div class="row justify-content-center">
-                    <div class="col-xl-6">
-                        <div class="text-center text-white">
-                            <!-- Page heading-->
-                            <h1 class="mb-5">Tu tienda online</h1>
-                            <!-- Signup form-->
-                            <!-- * * * * * * * * * * * * * * *-->
-                            <!-- * * SB Forms Contact Form * *-->
-                            <!-- * * * * * * * * * * * * * * *-->
-                            <!-- This form is pre-integrated with SB Forms.-->
-                            <!-- To make this form functional, sign up at-->
-                            <!-- https://startbootstrap.com/solution/contact-forms-->
-                            <!-- to get an API token!-->
-                            <form class="form-subscribe" id="contactForm" data-sb-form-api-token="API_TOKEN">
-                                <!-- Email address input-->
-                                <div class="row">
-                                    <div class="col">
-                                        <input class="form-control form-control-lg" id="emailAddress" type="email" placeholder="Email Address" data-sb-validations="required,email" />
-                                        <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:required">Email Address is required.</div>
-                                        <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:email">Email Address Email is not valid.</div>
-                                    </div>
-                                    <div class="col-auto"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Submit</button></div>
-                                </div>
-                                <!-- Submit success message-->
-                                <!---->
-                                <!-- This is what your users will see when the form-->
-                                <!-- has successfully submitted-->
-                                <div class="d-none" id="submitSuccessMessage">
-                                    <div class="text-center mb-3">
-                                        <div class="fw-bolder">Form submission successful!</div>
-                                        <p>To activate this form, sign up at</p>
-                                        <a class="text-white" href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                                    </div>
-                                </div>
-                                <!-- Submit error message-->
-                                <!---->
-                                <!-- This is what your users will see when there is-->
-                                <!-- an error submitting the form-->
-                                <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+     <header class="masthead" style="background-image: url('{% static "tienda/img/tienda_online.jpg" %}');">
+
+    <!-- OVERLAY OSCURO -->
+    <div style="background: rgba(0,0,0,0.55); height:100%;">
+
+        <div class="container position-relative">
+            <div class="row justify-content-center">
+                <div class="col-xl-6">
+                    <div class="text-center text-white">
+
+                        <h1 class="mb-5">Tu tienda online</h1>
+                    <div class="text-center mt-4">
+    <a href="{% url 'tienda:producto' %}" class="btn btn-primary btn-lg">
+        Ver productos
+    </a>
             </div>
-        </header>
-        {% block contenidoQueCambia %}
+      </div>
+    </div>
+  </div>
+ </div>
+</header>
+       {% block contenidoQueCambia %}
            {% endblock %} 
                 <!-- Icons Grid-->
         <section class="features-icons bg-light text-center">
@@ -121,22 +106,24 @@
                     <div class="col-lg-4">
                         <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
                             <div class="features-icons-icon d-flex"><i class="bi-window m-auto text-primary"></i></div>
-                            <h3>F</h3>
-                            <p class="lead mb-0">This theme will look great on any device, no matter the size!</p>
+                            <h3>CRUD de Productos</h3>
+                            <p class="lead mb-0">Sistema de altas, bajas y modificaciones de productos
+implementado con Django y vistas basadas en clases.</p>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
                             <div class="features-icons-icon d-flex"><i class="bi-layers m-auto text-primary"></i></div>
-                            <h3>Bootstrap 5 Ready</h3>
-                            <p class="lead mb-0">Featuring the latest build of the new Bootstrap 5 framework!</p>
+                            <h3>Mi Tienda Online</h3>
+                             <p>Proyecto final desarrollado con Django y Bootstrap 5.</p>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="features-icons-item mx-auto mb-0 mb-lg-3">
                             <div class="features-icons-icon d-flex"><i class="bi-terminal m-auto text-primary"></i></div>
-                            <h3>Easy to Use</h3>
-                            <p class="lead mb-0">Ready to use with your own content, or customize the source files!</p>
+                            <h3>Carrito de Compras</h3>
+                            <pclass="lead mb-0"> Los usuarios pueden agregar productos al carrito,
+visualizar el total de la compra y realizar pedidos de forma simple y segura!</p>
                         </div>
                     </div>
                 </div>
@@ -146,9 +133,9 @@
         <section class="showcase">
             <div class="container-fluid p-0">
                 <div class="row g-0">
-                    <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url({% static 'tienda/assets/img/bg-showcase-1.jpg' %})"></div>
+                    <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('{% static 'tienda/assets/img/bg-showcase-1.jpg' %}')"></div>
                     <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-                        <h2>Fully Responsive Design</h2>
+                                                <h2>Fully Responsive Design</h2>
                         <p class="lead mb-0">When you use a theme created by Start Bootstrap, you know that the theme will look great on any device, whether it's a phone, tablet, or desktop the page will behave responsively!</p>
                     </div>
                 </div>
@@ -277,7 +264,7 @@
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+        {% comment %} <script src="js/scripts.js"></script> {% endcomment %}
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
